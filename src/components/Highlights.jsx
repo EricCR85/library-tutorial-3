@@ -10,7 +10,7 @@ const Highlights = () => {
             Why choose <span className="Blue">Library</span>
           </h2>
           <div className="highlight__wrapper">
-            {/* <Highlight icon={<FontAwesomeIcon icon='bolt' />} /> */}
+            <Highlight icon={<FontAwesomeIcon icon='bolt' />} />
             <div className="highlight">
               <div className="highlight_img">
                 <FontAwesomeIcon icon="bolt" />
