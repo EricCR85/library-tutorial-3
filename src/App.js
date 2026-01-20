@@ -9,7 +9,9 @@ import Featured from "./components/Featured";
 import Explore from "./components/Explore";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./Pages/Home";
+import Books  from "./Pages/Books";
 // import Highlight from './components/ui/Highligh';
+
 function App() {
   return (
     <Router>
