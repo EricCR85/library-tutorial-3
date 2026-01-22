@@ -1,6 +1,6 @@
 import React from "react";
 
-const BookInfo = () => {
+const BookInfo = ({ books }) => {
   return (
     <div id="books__body">
       <main id="books__main">
