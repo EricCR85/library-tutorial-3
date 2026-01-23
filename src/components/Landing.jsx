@@ -7,7 +7,7 @@ const Landing = () => {
     <section id="landing">
       <header>
         <div className="header__container">
-          <div className="header_discription">
+          <div className="header__description">
             <h1>America's most awarded online library plateform</h1>
             <h2>
               Find your dream book with <span className="Blue">Library</span>
