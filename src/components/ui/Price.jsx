@@ -16,3 +16,5 @@ const Price = ({ salePrice, originalPrice }) => {
     </div>
   );
 };
+
+export default Price;
