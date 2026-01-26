@@ -1,6 +1,12 @@
 import React from "react";
 
-const Cart = () => {
+const Cart = ({ cart = [], changeQuantity, removeItem }) => {
+  function getItemPrice(item) {
+    return item.salePrice ? item.salePrice : item.originalPrice;
+  }
+  function getTotal(item) {
+    return (getItemPrice(item) * item.quantity).toFixed(2);
+  }
   return (
     <div id="books__body">
       <main id="books__main">
@@ -16,42 +22,49 @@ const Cart = () => {
                 <span className="cart__total">Price</span>
               </div>
               <div className="cart__body">
-                <div className="cart__item">
-                  <div className="cart__book">
-                    <img src="https://m.media-amazon.com/images/I/61mIq2iJUXL._AC_UF1000,1000_QL80_.jpg" className="cart__book--img" alt="" />
-                    <div className="cart__book--info">
-                        <span className="cart__book--title">
-                            Crack the coding interview
-                        </span>
-                        <span className="cart__book--price">
-                            $10,000
-                        </span>
-                        <button className="cart__book--remove">
-                            Remove
-                        </button>
+                {cart.length === 0 ? (
+                  <div className="cart__empty">
+                    <span className="cart__title">Your cart is empty</span>
+                  </div>
+                ) : (
+                  cart.map((item) => (
+                    <div className="cart__item" key={item.id}>
+                      <div className="cart__book">
+                        <img src={item.url} className="cart__book--img" alt="" />
+                        <div className="cart__book--info">
+                          <span className="cart__book--title">{item.title}</span>
+                          <span className="cart__book--price">${getItemPrice(item).toFixed(2)}</span>
+                          <button className="cart__book--remove" onClick={() => removeItem(item.id)}>Remove</button>
+                        </div>
+                      </div>
+                      <div className="cart__quantity">
+                        <input
+                          type="number"
+                          min={1}
+                          max={99}
+                          className="cart__input"
+                          value={item.quantity}
+                          onChange={(e) => changeQuantity(item.id, e.target.value)}
+                        />
+                      </div>
+                      <div className="cart__total">${getTotal(item)}</div>
                     </div>
-                  </div>
-                  <div className="cart__quantity">
-                    <input type="number" min={0} max={99} className="cart__input" />
-                  </div>
-                  <div className="cart__total">
-                    $10,00
-                  </div>
-                </div>
+                  ))
+                )}
               </div>
             </div>
             <div className="total">
                <div className="total__item total__sub-total">
                 <span>Subtotal</span>
-                <span>$9.00</span>
+                <span>${cart.reduce((sum, item) => sum + getItemPrice(item) * item.quantity, 0).toFixed(2)}</span>
                </div>
                <div className="total__item total__tax">
-                <span>Subtotal</span>
-                <span>$9.00</span>
+                <span>Tax</span>
+                <span>${(cart.reduce((sum, item) => sum + getItemPrice(item) * item.quantity, 0) * 0.1).toFixed(2)}</span>
                </div>
                <div className="total__item total__price">
                 <span>Total</span>
-                <span>$10.00</span>
+                <span>${(cart.reduce((sum, item) => sum + getItemPrice(item) * item.quantity, 0) * 1.1).toFixed(2)}</span>
                </div>
                <button className="btn btn__checkout no-cursor"
                onClick={() => alert(`Havent got around to doing this :(`)}>

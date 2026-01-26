@@ -8,7 +8,7 @@ import {
 import LibraryLogo from "../assets/Library.svg";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-const Nav = () => {
+const Nav = ({ cart = [] }) => {
   function openMenu() {
     document.body.classList += " menu--open";
   }
@@ -44,7 +44,7 @@ const Nav = () => {
             <Link to="/cart" className="nav__link">
               <FontAwesomeIcon icon={faShoppingCart} />
             </Link>
-            <span className="cart__length">2</span>
+            <span className="cart__length">{cart.reduce((sum, item) => sum + (item.quantity || 0), 0)}</span>
           </li>
         </ul>
 
