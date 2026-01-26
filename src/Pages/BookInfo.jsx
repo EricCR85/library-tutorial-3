@@ -18,6 +18,23 @@ const BookInfo = ({ books, addToCart, cart }) => {
     return cart.find(book => book.id === +id);
   }
 
+ if (!book) {
+    return (
+      <div id="books__body">
+        <main id="books__main">
+          <div className="books__container">
+            <div className="row">
+              <h2>Book not found</h2>
+              <Link to="/books" className="book__link">
+                <button className="btn">Back to Books</button>
+              </Link>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
   // console.log(book);
   return (
     <div id="books__body">
