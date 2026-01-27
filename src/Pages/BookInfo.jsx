@@ -36,6 +36,8 @@ const BookInfo = ({ books, addToCart, cart = [] }) => {
 //   }
 
 //   console.log(book);
+
+
   return (
     <div id="books__body">
       <main id="books__main">
