@@ -20,35 +20,7 @@ function App() {
   const [cart, setCart] = useState([]);
 
   function addToCart(book) {
-    const dupeItem = cart.find((item) => +item.id === +book.id);
-    if (dupeItem) {
-      setCart(
-        cart.map((item) => {
-          if (item.id === dupeItem.id) {
-            return {
-              ...item,
-              quantity: item.quantity + 1,
-            };
-          } else {
-            return item;
-          }
-        }),
-      );
-    } else {
-      setCart([...cart, { ...book, quantity: 1 }]);
-    }
-  }
-
-  function changeQuantity(id, quantity) {
-    setCart(
-      cart.map((item) =>
-        +item.id === +id ? { ...item, quantity: Number(quantity) } : item,
-      ),
-    );
-  }
-
-  function removeItem(id) {
-    setCart(cart.filter((item) => +item.id !== +id));
+  setCart([...cart, book])
   }
 
   useEffect(() => {
