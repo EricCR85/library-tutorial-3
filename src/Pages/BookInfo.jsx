@@ -35,7 +35,7 @@ const BookInfo = ({ books, addToCart, cart = [] }) => {
 //     );
 //   }
 
-//   console.log(book);
+  console.log(book);
 
 
   return (

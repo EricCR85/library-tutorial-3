@@ -20,7 +20,35 @@ function App() {
   const [cart, setCart] = useState([]);
 
   function addToCart(book) {
-  setCart([...cart, book])
+    setCart(() => {
+      const bookInCart = cart.find((item) => item.id === book.id);
+      if (bookInCart) {
+        return cart.map((item) =>
+          item.id === book.id ? { ...item, quantity: item.quantity + 1 } : item,
+        );
+      } else {
+        return [...cart, { ...book, quantity: 1 }];
+      }
+    });
+  }
+
+  function changeQuantity(id, quantity) {
+    setCart(
+      cart.map((item) =>
+        item.id === id ? { ...item, quantity: Number(quantity) } : item,
+      ),
+    );
+  }
+
+  function removeItem(id) {
+    setCart(cart.filter((item) => item.id !== id));
+  }
+  function numberOfItems() {
+    let counter = 0;
+    cart.forEach(item => {
+      counter += item.quantity
+    })
+    return counter;
   }
 
   useEffect(() => {
@@ -29,18 +57,22 @@ function App() {
 
   return (
     <Router>
-      <Nav cart={cart} />
+      <Nav cart={cart} numberOfItems={numberOfItems} />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/books" exact render={() => <Books books={books} />} />
         <Route
           path="/books/:id"
-          render={() => <BookInfo books={books} addToCart={addToCart} />}
+          render={() => <BookInfo books={books} addToCart={addToCart} cart={cart} />}
         />
         <Route
           path="/cart"
           render={() => (
-            <Cart cart={cart} changeQuantity={changeQuantity} removeItem={removeItem} />
+            <Cart
+              cart={cart} books={books}
+              changeQuantity={changeQuantity}
+              removeItem={removeItem}
+            />
           )}
         />
       </Switch>
