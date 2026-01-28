@@ -26,7 +26,7 @@ const Book = ({ book }) => {
   });
 
   return (
-    <div className="book">!
+    <div className="book">
       {img ? (
         <>
           <Link to={`/books/${book.id}`}>
